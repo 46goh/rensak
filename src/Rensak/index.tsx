@@ -9,8 +9,12 @@ export const Rensak: React.FC<{}> = () => {
   const [output, setOutput] = useState("");
   return (
     <Wrapper>
-      <TextArea value={input} onChange={setInput} />
-      <TextArea value={output} onChange={setOutput} />
+      <TextAreaWrapper>
+        <TextArea value={input} onChange={setInput} />
+      </TextAreaWrapper>
+      <TextAreaWrapper>
+        <TextArea value={output} onChange={setOutput} />
+      </TextAreaWrapper>
     </Wrapper>
   );
 };
@@ -18,5 +22,12 @@ export const Rensak: React.FC<{}> = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
+`;
+
+const TextAreaWrapper = styled.div`
+  max-width: 600px;
+  min-width: 300px;
+  margin: 8px;
 `;
