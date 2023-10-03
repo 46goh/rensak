@@ -1,11 +1,12 @@
-"use client";
-
+import { ChakraProvider } from "@chakra-ui/react";
 import { Rensak } from "@/src/Rensak";
 
 export default function Home() {
   return (
     <main>
-      <Rensak />
+      <ChakraProvider>
+        <Rensak />
+      </ChakraProvider>
     </main>
   );
 }

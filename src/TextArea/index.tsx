@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { Textarea } from "@chakra-ui/react";
 
 type Props = {
   value: string;
@@ -12,5 +13,5 @@ export const TextArea: React.FC<Props> = ({ value, onChange }) => {
     },
     [onChange],
   );
-  return <textarea value={value} onChange={handleOnChange} />;
+  return <Textarea value={value} onChange={handleOnChange} />;
 };
