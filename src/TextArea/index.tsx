@@ -3,10 +3,11 @@ import { Textarea } from "@chakra-ui/react";
 
 type Props = {
   value: string;
+  readOnly?: boolean;
   onChange: (value: string) => void;
 };
 
-export const TextArea: React.FC<Props> = ({ value, onChange }) => {
+export const TextArea: React.FC<Props> = ({ value, readOnly, onChange }) => {
   const handleOnChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       onChange(e.target.value);
@@ -14,6 +15,12 @@ export const TextArea: React.FC<Props> = ({ value, onChange }) => {
     [onChange],
   );
   return (
-    <Textarea rows={5} fontSize={14} value={value} onChange={handleOnChange} />
+    <Textarea
+      rows={5}
+      fontSize={14}
+      value={value}
+      readOnly={readOnly}
+      onChange={handleOnChange}
+    />
   );
 };
