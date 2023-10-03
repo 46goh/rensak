@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Rensak } from "@/src/Rensak";
 
@@ -7,5 +7,5 @@ export default function Home() {
     <main>
       <Rensak />
     </main>
-  )
+  );
 }
