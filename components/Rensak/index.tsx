@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import { TextAreaForm } from "../TextAreaForm";
-import { Button } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
 import { ArrowDownIcon, CopyIcon } from "@chakra-ui/icons";
 import { SortBoard } from "../SortBoard";
 import { v4 as uuidv4 } from "uuid";
@@ -12,6 +12,7 @@ import { Item } from "@/types/Item";
 export const Rensak: React.FC<{}> = () => {
   const [input, setInput] = useState("");
   const [items, setItems] = useState([] as Item[]);
+  const toast = useToast();
 
   const onClickConvert = useCallback(() => {
     setItems(
@@ -30,9 +31,15 @@ export const Rensak: React.FC<{}> = () => {
     return items.map((item) => item.content).join("\n");
   }, [items]);
 
-  const onClickCopy = useCallback(() => {
-    navigator.clipboard.writeText(output);
-  }, [output]);
+  const onClickCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(output);
+    toast({
+      title: "クリップボードにコピーしました",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  }, [output, toast]);
 
   return (
     <Wrapper>
