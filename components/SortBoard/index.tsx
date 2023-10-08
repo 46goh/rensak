@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {
   DndContext,
-  closestCorners,
+  closestCenter,
   KeyboardSensor,
   PointerSensor,
   TouchSensor,
@@ -76,7 +76,7 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
       <FormLabel>ドラッグ&ドロップで並び替え</FormLabel>
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCorners}
+        collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}
