@@ -3,6 +3,7 @@ import { DragHandleIcon } from "@chakra-ui/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import styled from "@emotion/styled";
+import { forwardRef } from "react";
 
 type Props = Item;
 
@@ -14,6 +15,7 @@ export const DraggableItem: React.FC<Props> = ({ id, content }) => {
     transform,
     transition,
     isDragging,
+    setActivatorNodeRef,
   } = useSortable({ id });
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -21,7 +23,7 @@ export const DraggableItem: React.FC<Props> = ({ id, content }) => {
   };
   return (
     <VerticalCard ref={setNodeRef} style={style} isDragging={isDragging}>
-      <DragHandler {...attributes} {...listeners}>
+      <DragHandler ref={setActivatorNodeRef} {...attributes} {...listeners}>
         <DragIcon color="gray.400" />
       </DragHandler>
       <VerticalText>{content}</VerticalText>
@@ -29,16 +31,19 @@ export const DraggableItem: React.FC<Props> = ({ id, content }) => {
   );
 };
 
-export const DraggingItem: React.FC<Props> = ({ content }) => {
-  return (
-    <VerticalCardWithHeight>
-      <DragHandler>
-        <DragIcon color="gray.400" />
-      </DragHandler>
-      <VerticalText>{content}</VerticalText>
-    </VerticalCardWithHeight>
-  );
-};
+export const DraggingItem = forwardRef<HTMLDivElement, Props>(
+  ({ content }, ref) => {
+    return (
+      <VerticalCardWithHeight ref={ref}>
+        <DragHandler>
+          <DragIcon color="gray.400" />
+        </DragHandler>
+        <VerticalText>{content}</VerticalText>
+      </VerticalCardWithHeight>
+    );
+  },
+);
+DraggingItem.displayName = "DraggingItem";
 
 const VerticalCard = styled.div<{ isDragging?: boolean }>`
   ${({ isDragging }) =>
@@ -65,6 +70,7 @@ const VerticalCardWithHeight = styled(VerticalCard)`
 `;
 
 const DragHandler = styled.div`
+  touch-action: manipulation;
   padding: 8px;
 `;
 

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {
   DndContext,
-  closestCenter,
+  closestCorners,
   KeyboardSensor,
   PointerSensor,
   TouchSensor,
@@ -74,14 +74,14 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
   return (
     <Wrapper>
       <FormLabel>ドラッグ&ドロップで並び替え</FormLabel>
-      <SortBoardWrapper>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-          onDragCancel={handleDragCancel}
-        >
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCorners}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        onDragCancel={handleDragCancel}
+      >
+        <SortBoardWrapper>
           <ScrollableWrapper ref={setNodeRef}>
             <SortableContext
               items={items}
@@ -95,8 +95,8 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
           <DragOverlay>
             {activeItem ? <DraggingItem {...activeItem} /> : null}
           </DragOverlay>
-        </DndContext>
-      </SortBoardWrapper>
+        </SortBoardWrapper>
+      </DndContext>
     </Wrapper>
   );
 };
