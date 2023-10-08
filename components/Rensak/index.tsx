@@ -5,21 +5,29 @@ import styled from "@emotion/styled";
 import { TextArea } from "../TextArea";
 import { Button } from "@chakra-ui/react";
 import { ArrowDownIcon, CopyIcon } from "@chakra-ui/icons";
-import { SortBox } from "../SortBox";
+import { SortBoard } from "../SortBoard";
+import { v4 as uuidv4 } from "uuid";
+import { Item } from "@/types/Item";
 
 export const Rensak: React.FC<{}> = () => {
   const [input, setInput] = useState("");
-  const [items, setItems] = useState([] as readonly string[]);
-  const [output, setOutput] = useState("");
+  const [items, setItems] = useState([] as Item[]);
 
   const onClickConvert = useCallback(() => {
-    setItems(input.split(/\n/).filter((item) => !!item));
+    setItems(
+      input
+        .split(/\n/)
+        .filter((line) => !!line)
+        .map((line) => ({
+          id: uuidv4(),
+          content: line,
+        })),
+    );
   }, [input]);
 
   const canOutput = useMemo(() => items.length > 0, [items.length]);
-
-  const onClickOutput = useCallback(() => {
-    setOutput(items.join("\n"));
+  const output = useMemo(() => {
+    return items.map((item) => item.content).join("\n");
   }, [items]);
 
   const onClickCopy = useCallback(() => {
@@ -39,9 +47,18 @@ export const Rensak: React.FC<{}> = () => {
         変換
       </Button>
 
-      <SortBox items={items} onChange={setItems} />
+      <SortBoard items={items} onChange={setItems} />
 
-      <Button colorScheme="teal" leftIcon={<CopyIcon />} onClick={onClickCopy}>
+      <TextAreaWrapper>
+        <TextArea readOnly value={output} />
+      </TextAreaWrapper>
+
+      <Button
+        colorScheme="teal"
+        leftIcon={<CopyIcon />}
+        onClick={onClickCopy}
+        disabled={!canOutput}
+      >
         コピー
       </Button>
     </Wrapper>

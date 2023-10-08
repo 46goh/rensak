@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { Rensak } from "@/src/Rensak";
+import { Rensak } from "@/components/Rensak";
 
 export default function Home() {
   return (
