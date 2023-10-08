@@ -5,8 +5,8 @@ import { Noto_Sans_JP } from "next/font/google";
 const font = Noto_Sans_JP({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rensak - assemble your poems",
-  description: "Web app for assembling and sorting short poems",
+  title: "Rensak - 連作並び替えツール",
+  description: "短歌・俳句・川柳などの連作を並び替えるツール",
 };
 
 export default function RootLayout({

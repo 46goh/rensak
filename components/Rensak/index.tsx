@@ -81,7 +81,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: 32px 0;
+  padding: 8px 0 32px;
 `;
 
 const TextAreaWrapper = styled.div`
