@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import styled from "@emotion/styled";
-import { TextArea } from "../TextArea";
+import { TextAreaForm } from "../TextAreaForm";
 import { Button } from "@chakra-ui/react";
 import { ArrowDownIcon, CopyIcon } from "@chakra-ui/icons";
 import { SortBoard } from "../SortBoard";
@@ -37,20 +37,24 @@ export const Rensak: React.FC<{}> = () => {
   return (
     <Wrapper>
       <TextAreaWrapper>
-        <TextArea value={input} onChange={setInput} />
+        <TextAreaForm
+          label="↓ここに連作を貼り付け"
+          value={input}
+          onChange={setInput}
+        />
       </TextAreaWrapper>
       <Button
         colorScheme="teal"
         leftIcon={<ArrowDownIcon />}
         onClick={onClickConvert}
       >
-        変換
+        並び替える
       </Button>
 
       <SortBoard items={items} onChange={setItems} />
 
       <TextAreaWrapper>
-        <TextArea readOnly value={output} />
+        <TextAreaForm label="出力結果" readOnly value={output} />
       </TextAreaWrapper>
 
       <Button
@@ -59,7 +63,7 @@ export const Rensak: React.FC<{}> = () => {
         onClick={onClickCopy}
         disabled={!canOutput}
       >
-        コピー
+        出力結果をコピー
       </Button>
     </Wrapper>
   );
@@ -70,6 +74,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  padding: 32px 0;
 `;
 
 const TextAreaWrapper = styled.div`

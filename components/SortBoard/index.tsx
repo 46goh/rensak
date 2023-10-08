@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { DragHandleIcon } from "@chakra-ui/icons";
 import {
   DndContext,
   closestCenter,
@@ -12,7 +11,6 @@ import {
   DragOverlay,
   DragStartEvent,
   useDroppable,
-  DragOverEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -23,6 +21,7 @@ import {
 import { useCallback, useState } from "react";
 import { DraggableItem, DraggingItem } from "./DraggableItem";
 import { Item } from "@/types/Item";
+import { FormLabel } from "@chakra-ui/react";
 
 type Props = {
   items: Item[];
@@ -73,31 +72,40 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
   }, []);
 
   return (
-    <SortBoardWrapper>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-        onDragCancel={handleDragCancel}
-      >
-        <ScrollableWrapper ref={setNodeRef}>
-          <SortableContext
-            items={items}
-            strategy={horizontalListSortingStrategy}
-          >
-            {items.map((item) => (
-              <DraggableItem key={item.id} {...item} />
-            ))}
-          </SortableContext>
-        </ScrollableWrapper>
-        <DragOverlay>
-          {activeItem ? <DraggingItem {...activeItem} /> : null}
-        </DragOverlay>
-      </DndContext>
-    </SortBoardWrapper>
+    <Wrapper>
+      <FormLabel>ドラッグ&ドロップで並び替え</FormLabel>
+      <SortBoardWrapper>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          onDragCancel={handleDragCancel}
+        >
+          <ScrollableWrapper ref={setNodeRef}>
+            <SortableContext
+              items={items}
+              strategy={horizontalListSortingStrategy}
+            >
+              {items.map((item) => (
+                <DraggableItem key={item.id} {...item} />
+              ))}
+            </SortableContext>
+          </ScrollableWrapper>
+          <DragOverlay>
+            {activeItem ? <DraggingItem {...activeItem} /> : null}
+          </DragOverlay>
+        </DndContext>
+      </SortBoardWrapper>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+`;
 
 const SortBoardWrapper = styled.div`
   border: 1px solid #e0e0e0;
