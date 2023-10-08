@@ -36,6 +36,7 @@ export const Rensak: React.FC<{}> = () => {
     toast({
       title: "クリップボードにコピーしました",
       status: "success",
+      position: "bottom-right",
       duration: 5000,
       isClosable: true,
     });
