@@ -32,7 +32,6 @@
     "eslint-config-prettier": "^9.0.0",
     "postcss": "latest",
     "prettier": "3.0.3",
-    "tailwindcss": "latest",
     "typescript": "latest"
   }
 }
