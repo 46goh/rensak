@@ -70,7 +70,7 @@ const VerticalCardWithHeight = styled(VerticalCard)`
 `;
 
 const DragHandler = styled.div`
-  touch-action: manipulation;
+  touch-action: none;
   padding: 8px;
 `;
 
