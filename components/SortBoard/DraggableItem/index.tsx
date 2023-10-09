@@ -81,6 +81,5 @@ const DragIcon = styled(DragHandleIcon)`
 const VerticalText = styled.span`
   padding: 4px 4px 8px;
   writing-mode: vertical-rl;
-  text-orientation: upright;
   overflow-wrap: anywhere;
 `;
