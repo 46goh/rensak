@@ -18,6 +18,10 @@ import {
   sortableKeyboardCoordinates,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import {
+  restrictToHorizontalAxis,
+  restrictToFirstScrollableAncestor,
+} from "@dnd-kit/modifiers";
 import { useCallback, useState } from "react";
 import { DraggableItem, DraggingItem } from "./DraggableItem";
 import { Item } from "@/types/Item";
@@ -80,6 +84,10 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         onDragCancel={handleDragCancel}
+        modifiers={[
+          restrictToFirstScrollableAncestor,
+          restrictToHorizontalAxis,
+        ]}
       >
         <SortBoardWrapper>
           <ScrollableWrapper ref={setNodeRef}>
@@ -113,7 +121,7 @@ const SortBoardWrapper = styled.div`
   height: 600px;
   width: calc(100vw - 16px);
   margin: auto;
-  padding: 16px;
+  padding: 16px 0;
 `;
 
 const ScrollableWrapper = styled.div`
