@@ -25,7 +25,7 @@ import {
 import { useCallback, useState } from "react";
 import { DraggableItem, DraggingItem } from "./DraggableItem";
 import { Item } from "@/types/Item";
-import { FormLabel } from "@chakra-ui/react";
+import { FormLabel, Tag } from "@chakra-ui/react";
 
 type Props = {
   items: Item[];
@@ -77,7 +77,10 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
 
   return (
     <Wrapper>
-      <FormLabel>ドラッグ&ドロップで並び替え</FormLabel>
+      <LabelWrapper>
+        <FormLabel>ドラッグ&ドロップで並び替え</FormLabel>
+        <Tag color="teal">{items.length}</Tag>
+      </LabelWrapper>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -113,6 +116,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  gap: 4px;
+`;
+
+const LabelWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const SortBoardWrapper = styled.div`
