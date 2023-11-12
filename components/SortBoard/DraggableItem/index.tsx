@@ -1,13 +1,18 @@
 import { Item } from "@/types/Item";
 import { DragHandleIcon } from "@chakra-ui/icons";
+import { Tag } from "@chakra-ui/react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import styled from "@emotion/styled";
 import { forwardRef } from "react";
 
-type Props = Item;
+type DraggableItemProps = Item & { index: number };
 
-export const DraggableItem: React.FC<Props> = ({ id, content }) => {
+export const DraggableItem: React.FC<DraggableItemProps> = ({
+  id,
+  content,
+  index,
+}) => {
   const {
     attributes,
     listeners,
@@ -26,12 +31,15 @@ export const DraggableItem: React.FC<Props> = ({ id, content }) => {
       <DragHandler ref={setActivatorNodeRef} {...attributes} {...listeners}>
         <DragIcon color="gray.400" />
       </DragHandler>
+      <Tag color="teal">{index + 1}</Tag>
       <VerticalText>{content}</VerticalText>
     </VerticalCard>
   );
 };
 
-export const DraggingItem = forwardRef<HTMLDivElement, Props>(
+type DraggingItemProps = Item;
+
+export const DraggingItem = forwardRef<HTMLDivElement, DraggingItemProps>(
   ({ content }, ref) => {
     return (
       <VerticalCardWithHeight ref={ref}>

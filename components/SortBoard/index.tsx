@@ -98,8 +98,8 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
               items={items}
               strategy={horizontalListSortingStrategy}
             >
-              {items.map((item) => (
-                <DraggableItem key={item.id} {...item} />
+              {items.map((item, index) => (
+                <DraggableItem key={item.id} {...item} index={index} />
               ))}
             </SortableContext>
           </ScrollableWrapper>
