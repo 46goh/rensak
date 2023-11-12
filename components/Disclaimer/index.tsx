@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 export const Disclaimer = () => {
   return (
-    <Wrapper>
+    <section>
       <Heading as="h2" size="md">
         注意事項
       </Heading>
@@ -21,13 +21,9 @@ export const Disclaimer = () => {
           </Text>
         </Li>
       </ul>
-    </Wrapper>
+    </section>
   );
 };
-
-const Wrapper = styled.div`
-  margin: 0 8px;
-`;
 
 const Li = styled.li`
   margin-left: 24px;
