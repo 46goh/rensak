@@ -1,17 +1,21 @@
 import { Item } from "@/types/Item";
-import { DragHandleIcon } from "@chakra-ui/icons";
-import { Tag } from "@chakra-ui/react";
+import { ArrowLeftIcon, DownloadIcon, DragHandleIcon } from "@chakra-ui/icons";
+import { IconButton, Tag } from "@chakra-ui/react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import styled from "@emotion/styled";
-import { forwardRef } from "react";
+import { forwardRef, useCallback } from "react";
 
-type DraggableItemProps = Item & { index: number };
+type DraggableItemProps = Item & {
+  index: number;
+  onGoToLast: (index: number) => void;
+};
 
 export const DraggableItem: React.FC<DraggableItemProps> = ({
   id,
   content,
   index,
+  onGoToLast,
 }) => {
   const {
     attributes,
@@ -26,6 +30,11 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
     transform: CSS.Transform.toString(transform),
     transition: transition,
   };
+
+  const handleClickGoToLastButton = useCallback(() => {
+    onGoToLast(index);
+  }, [index, onGoToLast]);
+
   return (
     <VerticalCard ref={setNodeRef} style={style} isDragging={isDragging}>
       <DragHandler ref={setActivatorNodeRef} {...attributes} {...listeners}>
@@ -33,6 +42,13 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
       </DragHandler>
       <Tag color="teal">{index + 1}</Tag>
       <VerticalText>{content}</VerticalText>
+      <IconButton
+        size="xs"
+        aria-label="末尾に送る"
+        icon={<DownloadIcon style={{ rotate: "90deg" }} />}
+        color="teal"
+        onClick={handleClickGoToLastButton}
+      />
     </VerticalCard>
   );
 };
@@ -42,12 +58,20 @@ type DraggingItemProps = Item;
 export const DraggingItem = forwardRef<HTMLDivElement, DraggingItemProps>(
   ({ content }, ref) => {
     return (
-      <VerticalCardWithHeight ref={ref}>
+      <VerticalCard ref={ref}>
         <DragHandler>
           <DragIcon color="gray.400" />
         </DragHandler>
+        <Tag color="teal">-</Tag>
         <VerticalText>{content}</VerticalText>
-      </VerticalCardWithHeight>
+        <IconButton
+          size="xs"
+          aria-label="末尾に送る"
+          icon={<DownloadIcon style={{ rotate: "90deg" }} />}
+          color="gray"
+          disabled
+        />
+      </VerticalCard>
     );
   },
 );
@@ -70,11 +94,9 @@ const VerticalCard = styled.div<{ isDragging?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
   min-width: 54px;
-`;
-
-const VerticalCardWithHeight = styled(VerticalCard)`
-  height: 568px;
+  padding-bottom: 8px;
 `;
 
 const DragHandler = styled.div`
@@ -90,4 +112,5 @@ const VerticalText = styled.span`
   padding: 4px 4px 8px;
   writing-mode: vertical-rl;
   overflow-wrap: anywhere;
+  height: 480px;
 `;

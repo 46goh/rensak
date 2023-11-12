@@ -75,6 +75,13 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
     setActiveItem(null);
   }, []);
 
+  const handleGoToLast = useCallback(
+    (index: number) => {
+      onChange(arrayMove(items, index, items.length - 1));
+    },
+    [items, onChange],
+  );
+
   return (
     <Wrapper>
       <LabelWrapper>
@@ -99,7 +106,12 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
               strategy={horizontalListSortingStrategy}
             >
               {items.map((item, index) => (
-                <DraggableItem key={item.id} {...item} index={index} />
+                <DraggableItem
+                  key={item.id}
+                  {...item}
+                  index={index}
+                  onGoToLast={handleGoToLast}
+                />
               ))}
             </SortableContext>
           </ScrollableWrapper>
@@ -128,7 +140,6 @@ const LabelWrapper = styled.div`
 const SortBoardWrapper = styled.div`
   border: 1px solid #e0e0e0;
   border-radius: 16px;
-  height: 600px;
   width: calc(100vw - 16px);
   margin: auto;
   padding: 16px 0;
