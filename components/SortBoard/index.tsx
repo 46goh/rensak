@@ -88,7 +88,7 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
       <LabelWrapper>
         <FormLabel>
           ドラッグ&ドロップで並び替え（
-          <Tag color="teal">
+          <Tag color="teal" size="sm" verticalAlign="baseline">
             <DownloadIcon style={{ rotate: "90deg" }} color="teal" />
           </Tag>
           ボタンで末尾に送る）
