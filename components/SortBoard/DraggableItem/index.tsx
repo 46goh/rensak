@@ -112,5 +112,5 @@ const VerticalText = styled.span`
   padding: 4px 4px 8px;
   writing-mode: vertical-rl;
   overflow-wrap: anywhere;
-  height: 480px;
+  height: 490px;
 `;

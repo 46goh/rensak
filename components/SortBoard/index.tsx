@@ -143,6 +143,7 @@ const SortBoardWrapper = styled.div`
   width: calc(100vw - 16px);
   margin: auto;
   padding: 16px 0;
+  height: 600px;
 `;
 
 const ScrollableWrapper = styled.div`
