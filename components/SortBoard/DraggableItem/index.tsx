@@ -1,5 +1,5 @@
 import { Item } from "@/types/Item";
-import { ArrowLeftIcon, DownloadIcon, DragHandleIcon } from "@chakra-ui/icons";
+import { DownloadIcon, DragHandleIcon } from "@chakra-ui/icons";
 import { IconButton, Tag } from "@chakra-ui/react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -59,7 +59,7 @@ export const DraggingItem = forwardRef<HTMLDivElement, DraggingItemProps>(
   ({ content }, ref) => {
     return (
       <VerticalCard ref={ref}>
-        <DragHandler>
+        <DragHandler isDragging>
           <DragIcon color="gray.400" />
         </DragHandler>
         <Tag color="teal">-</Tag>
@@ -99,7 +99,15 @@ const VerticalCard = styled.div<{ isDragging?: boolean }>`
   padding-bottom: 8px;
 `;
 
-const DragHandler = styled.div`
+const DragHandler = styled.div<{ isDragging?: boolean }>`
+  ${({ isDragging }) =>
+    isDragging
+      ? `
+        cursor: grabbing;
+      `
+      : `
+        cursor: grab;
+      `}
   touch-action: none;
   padding: 8px;
 `;
