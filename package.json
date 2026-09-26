@@ -16,14 +16,13 @@
     "@dnd-kit/sortable": "^7.0.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@types/uuid": "^9.0.5",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.3",
     "framer-motion": "^10.16.4",
-    "next": "15.3.8",
+    "next": "15.5.26",
     "react": "latest",
     "react-dom": "latest",
-    "uuid": "^9.0.1"
+    "uuid": "^14.0.2"
   },
   "devDependencies": {
     "@types/node": "latest",
@@ -36,5 +35,9 @@
     "postcss": "latest",
     "prettier": "3.0.3",
     "typescript": "latest"
+  },
+  "overrides": {
+    "brace-expansion@1": "^1.1.21",
+    "postcss": "$postcss"
   }
 }
