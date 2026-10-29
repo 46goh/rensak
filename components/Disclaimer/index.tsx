@@ -29,9 +29,10 @@ export const Disclaimer = () => {
           <Text textStyle="sm">
             ご意見・ご要望・不具合の連絡は{" "}
             <Link
-              color="teal.solid"
+              color="teal.fg"
               href="https://twitter.com/46goh"
               target="_blank"
+              rel="noopener noreferrer"
             >
               @46goh
             </Link>{" "}

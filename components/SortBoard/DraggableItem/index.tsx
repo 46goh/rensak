@@ -40,7 +40,7 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
       <DragHandler ref={setActivatorNodeRef} {...attributes} {...listeners}>
         <DragIcon />
       </DragHandler>
-      <Tag.Root color="teal.solid">
+      <Tag.Root color="teal.fg">
         <Tag.Label>{index + 1}</Tag.Label>
       </Tag.Root>
       <VerticalText>{content}</VerticalText>
@@ -48,7 +48,7 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
         size="xs"
         aria-label="末尾に送る"
         variant="subtle"
-        color="teal.solid"
+        color="teal.fg"
         onClick={handleClickGoToLastButton}
       >
         <LuDownload style={{ rotate: "90deg" }} />
@@ -65,7 +65,7 @@ export const DraggingItem: React.FC<DraggingItemProps> = ({ content, ref }) => {
       <DragHandler isDragging>
         <DragIcon />
       </DragHandler>
-      <Tag.Root color="teal.solid">
+      <Tag.Root color="teal.fg">
         <Tag.Label>-</Tag.Label>
       </Tag.Root>
       <VerticalText>{content}</VerticalText>
@@ -86,7 +86,7 @@ const VerticalCard = styled.div<{ isDragging?: boolean }>`
   ${({ isDragging }) =>
     isDragging
       ? `
-        background-color: #31979522;
+        background-color: color-mix(in srgb, var(--chakra-colors-teal-solid) 13%, transparent);
         border: 1px solid #e0e0e022;
         color: #555555;
       `
