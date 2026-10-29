@@ -3,16 +3,16 @@
 import { useCallback, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import { TextAreaForm } from "../TextAreaForm";
-import { Button, useToast } from "@chakra-ui/react";
-import { ArrowDownIcon, CopyIcon } from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/react";
+import { LuArrowDown, LuCopy } from "react-icons/lu";
 import { SortBoard } from "../SortBoard";
 import { v4 as uuidv4 } from "uuid";
 import { Item } from "@/types/Item";
+import { toaster } from "@/components/ui/toaster";
 
 export const Rensak: React.FC<{}> = () => {
   const [input, setInput] = useState("");
   const [items, setItems] = useState([] as Item[]);
-  const toast = useToast();
 
   const onClickConvert = useCallback(() => {
     setItems(
@@ -33,14 +33,13 @@ export const Rensak: React.FC<{}> = () => {
 
   const onClickCopy = useCallback(async () => {
     await navigator.clipboard.writeText(output);
-    toast({
+    toaster.create({
       title: "クリップボードにコピーしました",
-      status: "success",
-      position: "bottom-right",
+      type: "success",
       duration: 5000,
-      isClosable: true,
+      meta: { closable: true },
     });
-  }, [output, toast]);
+  }, [output]);
 
   return (
     <Wrapper>
@@ -51,11 +50,8 @@ export const Rensak: React.FC<{}> = () => {
           onChange={setInput}
         />
       </TextAreaWrapper>
-      <Button
-        colorScheme="teal"
-        leftIcon={<ArrowDownIcon />}
-        onClick={onClickConvert}
-      >
+      <Button colorPalette="teal" onClick={onClickConvert}>
+        <LuArrowDown />
         並び替える
       </Button>
 
@@ -65,12 +61,8 @@ export const Rensak: React.FC<{}> = () => {
         <TextAreaForm label="出力結果" readOnly value={output} />
       </TextAreaWrapper>
 
-      <Button
-        colorScheme="teal"
-        leftIcon={<CopyIcon />}
-        onClick={onClickCopy}
-        disabled={!canOutput}
-      >
+      <Button colorPalette="teal" onClick={onClickCopy} disabled={!canOutput}>
+        <LuCopy />
         出力結果をコピー
       </Button>
     </Wrapper>

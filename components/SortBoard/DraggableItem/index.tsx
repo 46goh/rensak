@@ -1,10 +1,10 @@
 import { Item } from "@/types/Item";
-import { DownloadIcon, DragHandleIcon } from "@chakra-ui/icons";
 import { IconButton, Tag } from "@chakra-ui/react";
+import { LuDownload, LuGripVertical } from "react-icons/lu";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import styled from "@emotion/styled";
-import { forwardRef, useCallback } from "react";
+import { useCallback } from "react";
 
 type DraggableItemProps = Item & {
   index: number;
@@ -38,44 +38,51 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
   return (
     <VerticalCard ref={setNodeRef} style={style} isDragging={isDragging}>
       <DragHandler ref={setActivatorNodeRef} {...attributes} {...listeners}>
-        <DragIcon color="gray.400" />
+        <DragIcon />
       </DragHandler>
-      <Tag color="teal">{index + 1}</Tag>
+      <Tag.Root colorPalette="teal">
+        <Tag.Label>{index + 1}</Tag.Label>
+      </Tag.Root>
       <VerticalText>{content}</VerticalText>
       <IconButton
         size="xs"
         aria-label="末尾に送る"
-        icon={<DownloadIcon style={{ rotate: "90deg" }} />}
-        color="teal"
+        variant="subtle"
+        colorPalette="teal"
         onClick={handleClickGoToLastButton}
-      />
+      >
+        <LuDownload style={{ rotate: "90deg" }} />
+      </IconButton>
     </VerticalCard>
   );
 };
 
-type DraggingItemProps = Item;
+type DraggingItemProps = Item & {
+  ref?: React.Ref<HTMLDivElement>;
+};
 
-export const DraggingItem = forwardRef<HTMLDivElement, DraggingItemProps>(
-  ({ content }, ref) => {
-    return (
-      <VerticalCard ref={ref}>
-        <DragHandler isDragging>
-          <DragIcon color="gray.400" />
-        </DragHandler>
-        <Tag color="teal">-</Tag>
-        <VerticalText>{content}</VerticalText>
-        <IconButton
-          size="xs"
-          aria-label="末尾に送る"
-          icon={<DownloadIcon style={{ rotate: "90deg" }} />}
-          color="gray"
-          disabled
-        />
-      </VerticalCard>
-    );
-  },
-);
-DraggingItem.displayName = "DraggingItem";
+export const DraggingItem: React.FC<DraggingItemProps> = ({ content, ref }) => {
+  return (
+    <VerticalCard ref={ref}>
+      <DragHandler isDragging>
+        <DragIcon />
+      </DragHandler>
+      <Tag.Root colorPalette="teal">
+        <Tag.Label>-</Tag.Label>
+      </Tag.Root>
+      <VerticalText>{content}</VerticalText>
+      <IconButton
+        size="xs"
+        aria-label="末尾に送る"
+        variant="subtle"
+        colorPalette="gray"
+        disabled
+      >
+        <LuDownload style={{ rotate: "90deg" }} />
+      </IconButton>
+    </VerticalCard>
+  );
+};
 
 const VerticalCard = styled.div<{ isDragging?: boolean }>`
   ${({ isDragging }) =>
@@ -112,8 +119,9 @@ const DragHandler = styled.div<{ isDragging?: boolean }>`
   padding: 8px;
 `;
 
-const DragIcon = styled(DragHandleIcon)`
+const DragIcon = styled(LuGripVertical)`
   rotate: 90deg;
+  color: #a0aec0;
 `;
 
 const VerticalText = styled.span`
