@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
-import { FormLabel, Textarea } from "@chakra-ui/react";
-import styled from "@emotion/styled";
+import { Field, Textarea } from "@chakra-ui/react";
 
 type Props = {
   label: string;
@@ -22,8 +21,8 @@ export const TextAreaForm: React.FC<Props> = ({
     [onChange],
   );
   return (
-    <Wrapper>
-      <FormLabel>{label}</FormLabel>
+    <Field.Root>
+      <Field.Label>{label}</Field.Label>
       <Textarea
         rows={5}
         fontSize={14}
@@ -32,12 +31,6 @@ export const TextAreaForm: React.FC<Props> = ({
         bgColor={readOnly ? "gray.100" : "white"}
         onChange={handleOnChange}
       />
-    </Wrapper>
+    </Field.Root>
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-`;

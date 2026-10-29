@@ -21,8 +21,8 @@ import {
 import { useCallback, useState } from "react";
 import { DraggableItem, DraggingItem } from "./DraggableItem";
 import { Item } from "@/types/Item";
-import { FormLabel, Tag } from "@chakra-ui/react";
-import { DownloadIcon } from "@chakra-ui/icons";
+import { Tag, Text } from "@chakra-ui/react";
+import { LuDownload } from "react-icons/lu";
 
 type Props = {
   items: Item[];
@@ -82,14 +82,18 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
   return (
     <Wrapper>
       <LabelWrapper>
-        <FormLabel>
+        <Text as="div" textStyle="sm" fontWeight="medium">
           ドラッグ&ドロップで並び替え（
-          <Tag color="teal" size="sm" verticalAlign="baseline">
-            <DownloadIcon style={{ rotate: "90deg" }} color="teal" />
-          </Tag>
+          <Tag.Root colorPalette="teal" size="sm" verticalAlign="baseline">
+            <Tag.Label>
+              <LuDownload style={{ rotate: "90deg" }} />
+            </Tag.Label>
+          </Tag.Root>
           ボタンで末尾に送る）
-        </FormLabel>
-        <Tag color="teal">{items.length}</Tag>
+        </Text>
+        <Tag.Root colorPalette="teal">
+          <Tag.Label>{items.length}</Tag.Label>
+        </Tag.Root>
       </LabelWrapper>
       <DndContext
         sensors={sensors}
