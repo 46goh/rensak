@@ -19,10 +19,7 @@ export const Rensak: React.FC<{}> = () => {
       input
         .split(/\n/)
         .filter((line) => !!line)
-        .map((line) => ({
-          id: uuidv4(),
-          content: line,
-        })),
+        .map((line) => ({ id: uuidv4(), content: line })),
     );
   }, [input]);
 

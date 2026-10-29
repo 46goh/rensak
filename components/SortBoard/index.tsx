@@ -24,10 +24,7 @@ import { Item } from "@/types/Item";
 import { Tag, Text } from "@chakra-ui/react";
 import { LuDownload } from "react-icons/lu";
 
-type Props = {
-  items: Item[];
-  onChange: (items: Item[]) => void;
-};
+type Props = { items: Item[]; onChange: (items: Item[]) => void };
 
 export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
   const sensors = useSensors(
@@ -84,14 +81,14 @@ export const SortBoard: React.FC<Props> = ({ items, onChange }) => {
       <LabelWrapper>
         <Text as="div" textStyle="sm" fontWeight="medium">
           ドラッグ&ドロップで並び替え（
-          <Tag.Root colorPalette="teal" size="sm" verticalAlign="baseline">
+          <Tag.Root color="teal.solid" size="md" verticalAlign="baseline">
             <Tag.Label>
               <LuDownload style={{ rotate: "90deg" }} />
             </Tag.Label>
           </Tag.Root>
           ボタンで末尾に送る）
         </Text>
-        <Tag.Root colorPalette="teal">
+        <Tag.Root color="teal.solid" size="lg">
           <Tag.Label>{items.length}</Tag.Label>
         </Tag.Root>
       </LabelWrapper>

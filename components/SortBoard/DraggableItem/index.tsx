@@ -40,7 +40,7 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
       <DragHandler ref={setActivatorNodeRef} {...attributes} {...listeners}>
         <DragIcon />
       </DragHandler>
-      <Tag.Root colorPalette="teal">
+      <Tag.Root color="teal.solid">
         <Tag.Label>{index + 1}</Tag.Label>
       </Tag.Root>
       <VerticalText>{content}</VerticalText>
@@ -48,7 +48,7 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
         size="xs"
         aria-label="末尾に送る"
         variant="subtle"
-        colorPalette="teal"
+        color="teal.solid"
         onClick={handleClickGoToLastButton}
       >
         <LuDownload style={{ rotate: "90deg" }} />
@@ -57,9 +57,7 @@ export const DraggableItem: React.FC<DraggableItemProps> = ({
   );
 };
 
-type DraggingItemProps = Item & {
-  ref?: React.Ref<HTMLDivElement>;
-};
+type DraggingItemProps = Item & { ref?: React.Ref<HTMLDivElement> };
 
 export const DraggingItem: React.FC<DraggingItemProps> = ({ content, ref }) => {
   return (
@@ -67,7 +65,7 @@ export const DraggingItem: React.FC<DraggingItemProps> = ({ content, ref }) => {
       <DragHandler isDragging>
         <DragIcon />
       </DragHandler>
-      <Tag.Root colorPalette="teal">
+      <Tag.Root color="teal.solid">
         <Tag.Label>-</Tag.Label>
       </Tag.Root>
       <VerticalText>{content}</VerticalText>
@@ -75,7 +73,7 @@ export const DraggingItem: React.FC<DraggingItemProps> = ({ content, ref }) => {
         size="xs"
         aria-label="末尾に送る"
         variant="subtle"
-        colorPalette="gray"
+        color="gray.600"
         disabled
       >
         <LuDownload style={{ rotate: "90deg" }} />

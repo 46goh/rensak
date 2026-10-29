@@ -2,7 +2,7 @@ import { Heading } from "@chakra-ui/react";
 
 export const Title = () => {
   return (
-    <Heading as="h1" color="teal" m="8px" size="2xl">
+    <Heading as="h1" color="teal.solid" m="8px" size="2xl">
       Rensak - 連作並び替えツール
     </Heading>
   );
